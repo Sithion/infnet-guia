@@ -4,6 +4,8 @@ namespace: app
 
 resources:
   - namespace.yaml
-  - guia-app.yaml
-  - mysql.yaml
-  
+  - guia-app.service.yaml
+  - guia-app.deployment.yaml  
+  - mysql.pvc.yaml
+  - mysql.pod.yaml
+  - mysql.service.yaml    
