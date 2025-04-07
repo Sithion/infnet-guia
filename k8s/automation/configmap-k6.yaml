@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k6-script
+  namespace: automation
+data:
+  stress-test.js: |
+    import http from 'k6/http';
+    import { check, sleep } from 'k6';
+
+    export let options = {
+      vus: 100,
+      duration: '2m',
+      thresholds: {
+        http_req_failed: ['rate<0.05'],
+        http_req_duration: ['p(95)<1000'],
+      },
+    };
+
+    export default function () {
+      const res = http.get('http://192.168.49.2:30080/api/process');
+      check(res, {
+        'status is 200': (r) => r.status === 200,
+      });
+    }
