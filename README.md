@@ -59,3 +59,12 @@ minikube service grafana-service -n monitoring
 # Usuário: admin
 # Senha: test
 ```
+
+### Automation
+A parte de automação de testes da aplicação está bem simples apenas aplicando um teste de estresse em um endpoint da aplicação '/api/process'.
+
+Para subir as configurações da automação de testes da aplicação, execute:
+``` 
+kubectl apply -k k8s/automation
+```
+
