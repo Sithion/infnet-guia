@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { httpRequestCounter } from "./metrics";
 function simulateModerateCPULoad(iterations = 500_000) {
   let result = 0;
   for (let i = 0; i < iterations; i++) {
@@ -20,6 +21,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  httpRequestCounter.inc({ method: req.method, route: '/process' });
   const cpuResult = simulateModerateCPULoad();
   const memSample = simulateMemoryUsage();
   await delay(30);
